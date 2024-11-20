@@ -2,19 +2,19 @@
 
 function help() {
     cat << EOF
-Usage: $0 [COMP1_PATH] [COMP2_PATH]
+Usage: $0 [SCRIPT1_PATH] [SCRIPT2_PATH]
 
-Launches two compiled C executables in separate terminal windows.
+Launches two Lua scripts in separate terminal windows.
 
 Arguments:
-  COMP1_PATH    Path to the first executable (default: ./compiled/client)
-  COMP2_PATH    Path to the second executable (default: ./compiled/server)
+  SCRIPT1_PATH    Path to the first Lua script (default: ./scripts/client.lua)
+  SCRIPT2_PATH    Path to the second Lua script (default: ./scripts/server.lua)
 
 Options:
-  --help        Display this help message and exit
+  --help          Display this help message and exit
 
 Example:
-  $0 ./compiled/my_client ./compiled/my_server
+  $0 ./scripts/my_client.lua ./scripts/my_server.lua
 EOF
     exit 0
 }
@@ -23,27 +23,27 @@ if [[ "$1" == "--help" ]]; then
     help
 fi
 
-COMP1=${1:-"./compiled/client"}
-COMP2=${2:-"./compiled/server"}
+SCRIPT1=${1:-"./server.lua"}
+SCRIPT2=${2:-"./client.lua"}
 
 function terminate(){
     local FILE=$1
-    echo "Error: Compiled file executable not found: $FILE"
+    echo "Error: Lua script not found: $FILE"
     exit 1
 }
 
-if [[ ! -f "$COMP1" ]]; then
-    terminate "$COMP1"
+if [[ ! -f "$SCRIPT1" ]]; then
+    terminate "$SCRIPT1"
 fi
 
-if [[ ! -f "$COMP2" ]]; then
-    terminate "$COMP2"
+if [[ ! -f "$SCRIPT2" ]]; then
+    terminate "$SCRIPT2"
 fi
 
-COMP1_NAME=$(basename "$COMP1")
-COMP2_NAME=$(basename "$COMP2")
+SCRIPT1_NAME=$(basename "$SCRIPT1")
+SCRIPT2_NAME=$(basename "$SCRIPT2")
 
-gnome-terminal --title="$COMP1_NAME" -- bash -c "$COMP1; exec bash"
-gnome-terminal --title="$COMP2_NAME" -- bash -c "$COMP2; exec bash"
+gnome-terminal --title="$SCRIPT1_NAME" -- bash -c "lua $SCRIPT1; exec bash"
+gnome-terminal --title="$SCRIPT2_NAME" -- bash -c "lua $SCRIPT2; exec bash"
 
-echo "$COMP1_NAME and $COMP2_NAME launched in separate terminal windows."
+echo "$SCRIPT1_NAME and $SCRIPT2_NAME launched in separate terminal windows."
