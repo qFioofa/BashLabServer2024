@@ -13,7 +13,6 @@ local function connect_to_server()
 end
 
 local client = connect_to_server()
-
 print("Connected to server!")
 
 while true do
