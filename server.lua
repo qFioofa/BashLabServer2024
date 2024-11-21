@@ -1,4 +1,4 @@
-local socket = require("socket")
+local socket = require("socket") 
 
 local server = assert(socket.bind("*", 12345))
 print("Server started, waiting for connections...")
