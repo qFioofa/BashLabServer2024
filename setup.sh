@@ -31,7 +31,7 @@ if ! command -v luarocks &> /dev/null; then
     exit 1
 fi
 
-luarocks install luasocket
+luarocks install luasocket --local
 
 if luarocks list | grep -q "luasocket"; then
     echo "LuaSocket has been successfully installed."
