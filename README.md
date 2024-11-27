@@ -22,7 +22,7 @@
 - Второй вариант
 
 1) Используем ```git clone https://github.com/qFioofa/BashLabServer2024.git```.
-2) Прописывааем gcc ./client.cpp и gcc ./server.cpp для запуска клиента и сервера.
+2) Прописывааем g++ ./client.cpp и g++ ./server.cpp для запуска клиента и сервера.
 
 ## Авторы
 - Дмитрий Воскобойник
